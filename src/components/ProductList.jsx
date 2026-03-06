@@ -11,7 +11,7 @@ export default function ProductList({ products }) {
           sm={6}
           md={4}
           lg={3}
-          sx={{ backgroundColor: "primary.light", borderRadius: 1 }}
+          sx={{ borderRadius: 1 }}
         >
           <ProductCard product={product} />
         </Grid>
