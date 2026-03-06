@@ -4,6 +4,8 @@ import { router } from "../App";
 
 axios.defaults.baseURL = "http://localhost:5000/";
 
+axios.defaults.withCredentials = true;
+
 axios.interceptors.response.use(
   (response) => {
     return response;
@@ -58,6 +60,14 @@ const products = {
   details: (id) => methods.get(`products/${id}`),
 };
 
+const cart = {
+  get: () => methods.get("carts"),
+  addItem: (productId, quantity = 1) =>
+    methods.post(`carts?productId=${productId}&quantity=${quantity}`, {}),
+  deleteItem: (productId, quantity = 1) =>
+    methods.delete(`carts?productId=${productId}&quantity=${quantity}`),
+};
+
 const error = {
   get400Error: () =>
     methods.get("errors/bad-request").catch((error) => console.log(error)),
@@ -72,5 +82,6 @@ const error = {
 const request = {
   products,
   error,
+  cart,
 };
 export default request;
