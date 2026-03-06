@@ -2,28 +2,32 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ProductItem from "../components/ProductItem";
 import Loading from "../components/Loading";
+import request from "../api/apiClient";
 
-export default function ProductsDetaislPage() {
-  const { productsid } = useParams();
+export default function ProductsDetailsPage() {
+  const { productid } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   useEffect(() => {
     async function fetchProductDetails() {
       try {
-        const res = await fetch("http://localhost:5000/products/" + productsid);
-        const data = await res.json();
+        const data = await request.products.details(productid);
+        console.log(data);
         setProduct(data);
       } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
     }
     fetchProductDetails();
-  }, [productsid]);
+  }, [productid]);
 
   if (loading) {
     return <Loading message="Yükleniyor" />;
   }
-
+  if (!product) {
+    return <div>Ürün bulunamadı</div>;
+  }
   return <ProductItem product={product} />;
 }

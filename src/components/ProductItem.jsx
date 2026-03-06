@@ -8,6 +8,7 @@ export default function ProductItem({ product }) {
           <img
             src={`http://localhost:5000/images/${product.image}`}
             style={{ width: "100%" }}
+            alt={product.title}
           />
         </Paper>
       </Grid>

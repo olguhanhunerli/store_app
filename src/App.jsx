@@ -6,8 +6,10 @@ import CartPage from "./pages/Cart";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import ProductsDetailsPage from "./pages/ProductsDetails";
-
-const router = createBrowserRouter([
+import ErrorPage from "./pages/errors/Error";
+import ServerErrorPage from "./pages/errors/ServerError";
+import NotFoundErrorPage from "./pages/errors/Notfound";
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
             element: <ProductsPage />,
           },
           {
-            path: ":productsid",
+            path: ":productid",
             element: <ProductsDetailsPage />,
           },
         ],
@@ -45,6 +47,27 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
+      },
+      {
+        path: "errors",
+        children: [
+          {
+            index: true,
+            element: <ErrorPage />,
+          },
+          {
+            path: "server-error",
+            element: <ServerErrorPage />,
+          },
+          {
+            path: "not-found",
+            element: <NotFoundErrorPage />,
+          },
+          // {
+          //   path: "validation-error",
+          //   element: <Va />,
+          // },
+        ],
       },
     ],
   },
