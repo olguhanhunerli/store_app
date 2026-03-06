@@ -65,10 +65,6 @@ export const router = createBrowserRouter([
             path: "not-found",
             element: <NotFoundErrorPage />,
           },
-          // {
-          //   path: "validation-error",
-          //   element: <Va />,
-          // },
         ],
       },
     ],
